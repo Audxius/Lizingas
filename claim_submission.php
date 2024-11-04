@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 session_start();
 require_once 'db.php';
 
@@ -106,6 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         <button type="submit">Submit Claim</button>
     </form>
-    <p><a href="dashboard.php">Back to Dashboard</a></p>
 </body>
 </html>
+<?php include 'footer.php'; ?>

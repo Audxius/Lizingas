@@ -1,4 +1,7 @@
+
+
 <?php
+include 'header.php';
 session_start();
 require_once 'db.php';
 
@@ -21,25 +24,47 @@ $isAdmin = $user && $user['is_admin'];
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Insurance Company Portal - Dashboard</h2>
-    <p>Welcome to the insurance company portal! Please select an option below:</p>
-
-    <ul>
-        <li><a href="calculator.php">Leasing Calculator</a> - Calculate monthly leasing payments.</li>
-        <li><a href="discount_calculator.php">Discount Calculator</a> - View your discount based on eligibility.</li>
-        <li><a href="claim_submission.php">Submit a Claim</a> - Submit a claim with photo uploads.</li>
-        <li><a href="user_rankings.php">User Rankings</a> - View the rankings of users based on profit/loss.</li>
-        <li><a href="profile.php">Profile editor</a> - Edit user profile</li>
-        
-        <?php if ($isAdmin): ?>
-            <li><a href="admin_dashboard.php">Admin Dashboard</a> - Manage user no-claim years and services.</li>
-            <li><a href="admin_claims.php">Approve/Deny claims</a> - Manage user claims.</li>
-            
-        <?php endif; ?>
-    </ul>
-
-    <p><a href="logout.php">Logout</a></p>
+    <h2>IT projektas</h2>
+    <p>Uzduotis</p>
+    <table class="table table-striped table-dark">
+    <tr>
+        <td><strong>Temos pavadinimas</strong></td>
+        <td>Draudimo bendrovės portalas</td>
+    </tr>
+    <tr>
+        <td><strong>Pagrindinės funkcijos</strong></td>
+        <td>
+            <ul>
+                <li><strong>Lizingo skaičiuotė</strong></li>
+                <li>Vartotojams nuolaidų skaičiavimo sistema, pagal nuostolių/pelno darymą. (Be išmokų praleisti vieneri (+2%), dveji (+5%) ar treji metai(+10%))</li>
+                <li>Nuolaidų darymas pagal pasirinktų paslaugų kiekį.</li>
+                <li>Nuostolių išmokos automatinis skaičiavimas (pagal įkeltas fotonuotraukas) – Parenkant detalių keitimą, detalių kainą, dažymo paslaugas.</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>Papildomos funkcijos</strong></td>
+        <td>
+            <ul>
+                <li>Papildomos nuolaidos „atvedus“ vartotoją (2% už kiekvieną naują vartotoją).</li>
+                <li>Vartotojų reitingavimas pagal pelną/nuostolius.</li>
+            </ul>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
+<?php include 'footer.php'; ?>

@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 session_start();
 require_once 'db.php';
 
@@ -51,6 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Leasing Calculator</title>
+    <style>
+        
+        </style>
 </head>
 <body>
     <h2>Leasing Calculator</h2>
@@ -71,3 +75,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 </body>
 </html>
+<?php include 'footer.php'; ?>

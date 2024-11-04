@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 session_start();
 require_once 'db.php';
 
@@ -110,3 +111,4 @@ $parts = ['Windows', 'Lights', 'Fenders', 'Doors', 'Bumpers', 'Mirrors'];
     <p><a href="admin_claims.php">Back to Claims</a></p>
 </body>
 </html>
+<?php include 'footer.php'; ?>

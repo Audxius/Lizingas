@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 session_start();
 require_once 'db.php';
 
@@ -58,3 +59,4 @@ $users = $stmt->fetchAll();
     </ul>
 </body>
 </html>
+<?php include 'footer.php'; ?>

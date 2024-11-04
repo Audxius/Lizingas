@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 session_start();
 require_once 'db.php';
 
@@ -71,6 +72,17 @@ if ($user) {
 <head>
     <meta charset="UTF-8">
     <title>Discount Calculation</title>
+    
+    <style>
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #white;
+  margin: 1em 0;
+  padding: 0;
+}
+        </style>
 </head>
 <body>
     <hr>
@@ -92,3 +104,4 @@ if ($user) {
 </ul>
 </body>
 </html>
+<?php include 'footer.php'; ?>

@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 session_start();
 require_once 'db.php';
 
@@ -61,7 +62,12 @@ $deniedClaims = fetchClaimsByStatus($pdo, 'Denied');
                 <td><?php echo htmlspecialchars($claim['name']); ?></td>
                 <td><?php echo htmlspecialchars($claim['description']); ?></td>
                 <td><?php echo htmlspecialchars($claim['created_at']); ?></td>
-                <td><a href="claim_details.php?claim_id=<?php echo $claim['claim_id']; ?>">Review</a></td>
+                <td>
+                    <form action="claim_details.php" method="get">
+                        <input type="hidden" name="claim_id" value="<?php echo htmlspecialchars($claim['claim_id']); ?>">
+                        <button type="submit">Review</button>
+                    </form>
+                </td>
             </tr>
         <?php endforeach; ?>
     </table>
@@ -105,7 +111,6 @@ $deniedClaims = fetchClaimsByStatus($pdo, 'Denied');
             </tr>
         <?php endforeach; ?>
     </table>
-
-    <p><a href="dashboard.php">Back to Dashboard</a></p>
 </body>
 </html>
+<?php include 'footer.php'; ?>

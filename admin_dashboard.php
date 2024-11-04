@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 session_start();
 require_once 'db.php';
 
@@ -70,8 +71,6 @@ $users = $stmt->fetchAll();
             </tr>
         <?php endforeach; ?>
     </table>
-
-    <p><a href="dashboard.php">Back to Main Dashboard</a></p>
 </body>
 </html>
-
+<?php include 'footer.php'; ?>
