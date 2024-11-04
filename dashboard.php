@@ -35,6 +35,8 @@ $isAdmin = $user && $user['is_admin'];
         
         <?php if ($isAdmin): ?>
             <li><a href="admin_dashboard.php">Admin Dashboard</a> - Manage user no-claim years and services.</li>
+            <li><a href="admin_claims.php">Approve/Deny claims</a> - Manage user claims.</li>
+            
         <?php endif; ?>
     </ul>
 
