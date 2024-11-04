@@ -75,15 +75,20 @@ if ($user) {
 <body>
     <hr>
     <h4>Claims</h4>
-    <p>1 year without a claim: User gets a 2% discount.</p>
-    <p>2 years without a claim: User gets a 5% discount.</p>
-    <p>3 or more years without a claim: User gets a 10% discount.</p>
-    <br>
-    <h4>Number of Services</h4>
-    <p>If a user selects 2-3 services, they get a 2% additional discount.</p>
-    <p>If a user selects more than 3 services, they receive the maximum 5% additional discount.</p>
-    <br>
+    <ul>
+    <li>1 year without a claim: User gets a 2% discount.</li>
+    <li>2 years without a claim: User gets a 5% discount.</li>
+    <li>3 or more years without a claim: User gets a 10% discount.</li>
+</ul>
+<h4>Number of Services</h4>
+<ul>
+    
+    <li>If a user selects 2-3 services, they get a 2% additional discount.</li>
+    <li>If a user selects more than 3 services, they receive the maximum 5% additional discount.</li>
+</ul>
     <h4>Referrals</h4>
-    <p>For each referral, the user receives an additional 2% discount.</p>
+    <ul>
+    <li>For each referral, the user receives an additional 2% discount.</li>
+</ul>
 </body>
 </html>

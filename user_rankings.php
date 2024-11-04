@@ -11,8 +11,8 @@ if (!isset($_SESSION['user_id'])) {
 // Calculate profit/loss score for each user, including num_services and referral count
 $stmt = $pdo->query("
     SELECT U.user_id, U.name, U.years_no_claims, U.num_services, 
-           (U.years_no_claims * 5) AS profit_loss_score,
-           COUNT(R.user_id) AS referral_count
+           COUNT(R.user_id) AS referral_count,
+           (U.years_no_claims * 5 + U.num_services * 3 + COUNT(R.user_id) * 2) AS profit_loss_score
     FROM Users U
     LEFT JOIN Users R ON U.user_id = R.referrer_id
     GROUP BY U.user_id
@@ -49,5 +49,12 @@ $users = $stmt->fetchAll();
             </tr>
         <?php endforeach; ?>
     </table>
+    <hr>
+    <h4>Calculation of the Profit/Loss Score</h4>
+    <ul>
+        <li><strong>Years without a claim:</strong> 5 points per year</li>
+        <li><strong>Number of services:</strong> 3 points per service</li>
+        <li><strong>Number of referrals:</strong> 2 points per referral</li>
+    </ul>
 </body>
 </html>
