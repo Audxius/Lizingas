@@ -2,7 +2,10 @@
 
 <?php
 include 'header.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once 'db.php';
 
 // Check if the user is logged in
