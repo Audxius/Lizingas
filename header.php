@@ -27,19 +27,20 @@ $isAdmin = $user && $user['is_admin'];
 <body>
     <div class="container">
         <div id="left-sidebar">
-            <h3>Dashboard Navigation</h3>
-            <button onclick="location.href='calculator.php'" title="Calculate monthly leasing payments.">Leasing Calculator</button>
-            <button onclick="location.href='discount_calculator.php'" title="View your discount based on eligibility.">Discount Calculator</button>
-            <button onclick="location.href='claim_submission.php'" title="Submit a claim with photo uploads.">Submit a Claim</button>
-            <button onclick="location.href='user_rankings.php'" title="View the rankings of users based on profit/loss.">User Rankings</button>
-            <button onclick="location.href='profile.php'" title="Edit your user profile">Profile Editor</button>
+            <h3>Navigacija</h3>
+            <button onclick="location.href='dashboard.php'" title="IT projekto užduotis">Užduotis</button>
+            <button onclick="location.href='calculator.php'" title="Apskaičiuoti lizinga su konkrečiais skaičiais">Lizingo skaičiuotuvas</button>
+            <button onclick="location.href='discount_calculator.php'" title="Suskaičiuoti kokia taikoma nuolaida">Nuolaidos skaičiuotuvas</button>
+            <button onclick="location.href='claim_submission.php'" title="Pateikti konkretų nuostolio aprašyma su nuotrauka">Pateikti nuostolį</button>
+            <button onclick="location.href='user_rankings.php'" title="Reitinguoti vartotojus pagal jų pelno/žalos vertę">Vartotojo reitingavimas</button>
+            <button onclick="location.href='profile.php'" title="Pakeisti kiek paslaugų esi užsiprenumeravęs">Profilio redegatorius</button>
             
             <?php if ($isAdmin): ?>
-                <button onclick="location.href='admin_dashboard.php'" title=" Manage user no-claim years and services.">Admin Dashboard</button>
-                <button onclick="location.href='admin_claims.php'" title="Manage user claims.">Manage Claims</button>
+                <button onclick="location.href='admin_dashboard.php'" title="Redaguoti kiek metų vartotojas nepateikė nuostolio ir kiek paslaugų užsiprenumeravęs">Admin sąsaja</button>
+                <button onclick="location.href='admin_claims.php'" title="Valdyti nuostolių paraiškas">Nuostolių paraiškos</button>
             <?php endif; ?>
 
-            <button onclick="location.href='logout.php'" title="Logout from the portal">Logout</button>
+            <button onclick="location.href='logout.php'" title="Atsijungti nuo portalo">Atsijungti</button>
         </div>
         
         <div id="content">

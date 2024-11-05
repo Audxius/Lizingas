@@ -52,26 +52,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Leasing Calculator</title>
-    <style>
-        
-        </style>
+     <style>
+        /* Style the form labels */
+        label {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        /* Style the input fields */
+        input[type="number"] {
+            width: 100%; /* Make all input fields the same width */
+            padding: 8px;
+           
+            box-sizing: border-box;
+        }
+
+        /* Style the form container */
+        form {
+            max-width: 400px; /* Set a max-width for the form */
+            margin: 0 auto; /* Center the form on the page */
+        }
+    </style>
 </head>
 <body>
-    <h2>Leasing Calculator</h2>
+    <h2>Lizingo skaičiuotuvas</h2>
     <form action="calculator.php" method="post">
-        <label for="item_cost">Item Cost ($):</label>
+        <label for="item_cost">Prekės kaina (€):</label>
         <input type="number" name="item_cost" id="item_cost" required><br><br>
 
-        <label for="down_payment">Down Payment ($):</label>
+        <label for="down_payment">Pradinis įnašas (€):</label>
         <input type="number" name="down_payment" id="down_payment" required><br><br>
 
-        <label for="lease_term">Lease Term (months):</label>
+        <label for="lease_term">Terminas (mėnesiais):</label>
         <input type="number" name="lease_term" id="lease_term" required><br><br>
 
-        <label for="interest_rate">Interest Rate (annual %):</label>
+        <label for="interest_rate">Palūkanos (metinės %):</label>
         <input type="number" name="interest_rate" id="interest_rate" step="0.01" required><br><br>
 
-        <button type="submit">Calculate Monthly Payment</button>
+        <button type="submit">Skaičiuoti mėnėsinį mokėsti</button>
     </form>
 </body>
 </html>

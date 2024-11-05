@@ -32,12 +32,12 @@ $users = $stmt->fetchAll();
     <h2>User Profit/Loss Rankings</h2>
     <table border="1">
         <tr>
-            <th>Rank</th>
-            <th>User Name</th>
-            <th>Years No Claims</th>
-            <th>Number of Services</th>
-            <th>Number of Referrals</th>
-            <th>Profit/Loss Score</th>
+            <th>Vieta</th>
+            <th>Vardas</th>
+            <th>Metai be nuostolių</th>
+            <th>Paslaugų kiekis</th>
+            <th>Atvesti žmonės</th>
+            <th>Pelno/nuostolių įvertis</th>
         </tr>
         <?php foreach ($users as $index => $user): ?>
             <tr>
@@ -51,12 +51,13 @@ $users = $stmt->fetchAll();
         <?php endforeach; ?>
     </table>
     <hr>
-    <h4>Calculation of the Profit/Loss Score</h4>
-    <ul>
-        <li><strong>Years without a claim:</strong> 5 points per year</li>
-        <li><strong>Number of services:</strong> 3 points per service</li>
-        <li><strong>Number of referrals:</strong> 2 points per referral</li>
-    </ul>
+    <h4>Pelnas/Nuostolis Balų Skaičiavimas</h4>
+<ul>
+    <li><strong>Metai be nuostolio:</strong> 5 taškai už kiekvienus metus</li>
+    <li><strong>Paslaugų skaičius:</strong> 3 taškai už kiekvieną paslaugą</li>
+    <li><strong>Atvestų žmonių skaičius:</strong> 2 taškai už kiekvieną atvestą žmogų</li>
+</ul>
+
 </body>
 </html>
 <?php include 'footer.php'; ?>

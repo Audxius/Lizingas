@@ -57,11 +57,11 @@ if ($user) {
     $_SESSION['user_discount'] = $totalDiscount;
 
     // Display the discount details
-    echo "<h2>Discount Calculation</h2>";
-    echo "Years without a claim: $yearsNoClaims <br>";
-    echo "Number of services selected: $numServices <br>";
-    echo "Number of referrals: $referrals <br>";
-    echo "<strong>Total Discount: " . number_format($totalDiscount, 2) . "%</strong>";
+    echo "<h2>Nuolaidos skaičiuotuvas</h2>";
+    echo "Metai be nuostolių: $yearsNoClaims <br>";
+    echo "Užsiprenumeruotų paslaugų kiekis: $numServices <br>";
+    echo "Atvestų žmonių skaičius: $referrals <br>";
+    echo "<strong>Galutinė nuolaida: " . number_format($totalDiscount, 2) . "%</strong>";
 } else {
     echo "User not found.";
 }
@@ -85,23 +85,23 @@ hr {
         </style>
 </head>
 <body>
-    <hr>
-    <h4>Claims</h4>
-    <ul>
-    <li>1 year without a claim: User gets a 2% discount.</li>
-    <li>2 years without a claim: User gets a 5% discount.</li>
-    <li>3 or more years without a claim: User gets a 10% discount.</li>
-</ul>
-<h4>Number of Services</h4>
+<hr>
+<h4>Nuostoliai</h4>
 <ul>
-    
-    <li>If a user selects 2-3 services, they get a 2% additional discount.</li>
-    <li>If a user selects more than 3 services, they receive the maximum 5% additional discount.</li>
+    <li>1 metai be nuostolio: Vartotojas gauna 2% nuolaidą.</li>
+    <li>2 metai be nuostolio: Vartotojas gauna 5% nuolaidą.</li>
+    <li>3 ar daugiau metų be nuostolio: Vartotojas gauna 10% nuolaidą.</li>
 </ul>
-    <h4>Referrals</h4>
-    <ul>
-    <li>For each referral, the user receives an additional 2% discount.</li>
+<h4>Paslaugų Kiekis</h4>
+<ul>
+    <li>Jei vartotojas pasirenka 2–3 paslaugas, jis gauna papildomą 2% nuolaidą.</li>
+    <li>Jei vartotojas pasirenka daugiau nei 3 paslaugas, jis gauna maksimalią 5% papildomą nuolaidą.</li>
 </ul>
+<h4>Atvesti Žmones</h4>
+<ul>
+    <li>Už kiekvieną atvestą žmogų vartotojas gauna papildomą 2% nuolaidą.</li>
+</ul>
+
 </body>
 </html>
 <?php include 'footer.php'; ?>

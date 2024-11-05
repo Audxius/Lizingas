@@ -24,17 +24,7 @@ $isAdmin = $user && $user['is_admin'];
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-    </style>
+
 </head>
 <body>
     <h2>IT projektas</h2>

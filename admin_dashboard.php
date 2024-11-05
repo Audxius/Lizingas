@@ -41,16 +41,48 @@ $users = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard - Manage Users</title>
+    <style>
+        /* Style the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        /* Make input fields and buttons fill their cells */
+        input[type="number"], button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        /* Button styling */
+        button {
+            background-color: #3d2486; /* Custom color */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #291a61; /* Darker shade on hover */
+        }
+    </style>
 </head>
 <body>
-    <h2>Admin Dashboard: Update Years Without a Claim & Number of Services</h2>
+    <h2>Admin sąsaja</h2>
     <table border="1">
         <tr>
-            <th>User ID</th>
-            <th>Name</th>
-            <th>Years Without a Claim</th>
-            <th>Number of Services</th>
-            <th>Update</th>
+            <th>Vartotojo ID</th>
+            <th>Vardas</th>
+            <th>Metai be nuostolių</th>
+            <th>Užsiprenumeruotų paslaugų skaičius</th>
+            <th>Atnaujinti</th>
         </tr>
         <?php foreach ($users as $user): ?>
             <tr>
@@ -65,7 +97,7 @@ $users = $stmt->fetchAll();
                     </td>
                     <td>
                         <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user['user_id']); ?>">
-                        <button type="submit" name="update_user">Update</button>
+                        <button type="submit" name="update_user">Atnaujinti</button>
                     </td>
                 </form>
             </tr>

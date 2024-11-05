@@ -30,13 +30,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Update Services</title>
+    <style>
+        /* Style the form labels */
+        label {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        /* Style the input fields */
+        input[type="number"] {
+            width: 100%; /* Make all input fields the same width */
+            padding: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Style the form container */
+        form {
+            max-width: 400px; /* Set a max-width for the form */
+            margin: 0 auto; /* Center the form on the page */
+        }
+    </style>
 </head>
+
 <body>
-    <h2>Update Number of Services</h2>
+    <h2>Kiek paslaugų užsiprenumeravęs</h2>
     <form action="profile.php" method="post">
-        <label for="num_services">Number of Services:</label>
+        <label for="num_services">Paslaugų skaičius:</label>
         <input type="number" name="num_services" id="num_services" value="<?= htmlspecialchars($user['num_services']) ?>" required><br><br>
-        <button type="submit">Update Services</button>
+        <button type="submit">Atnaujinti skaičių</button>
     </form>
 </body>
 </html>

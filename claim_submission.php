@@ -92,21 +92,112 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Submit a Claim</title>
+    <style>
+    /* Center everything in the body */
+    body {
+        display: flex;
+        justify-content: center;
+        
+        min-height: 100vh;
+        text-align: center;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Style the form labels */
+    label {
+        display: block;
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    /* Style input fields and textarea */
+    input[type="number"], textarea {
+        width: 100%;
+        padding: 10px;
+        height:200px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Style the form container */
+    form {
+        max-width: 400px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Style buttons */
+    button, .file-upload-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+    }
+
+    /* Hide the native file input */
+    input[type="file"] {
+        display: none;
+    }
+
+    /* Style for file upload button and selected file names container */
+    .file-upload-container {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .file-names {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #555;
+        word-wrap: break-word;
+    }
+    button, .file-upload-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #3d2486; /* Updated button color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+</style>
+
 </head>
-<body>
-    <h2>Submit a Claim</h2>
-    <?php if ($message): ?>
-        <p><?php echo htmlspecialchars($message); ?></p>
-    <?php endif; ?>
-    <form action="claim_submission.php" method="post" enctype="multipart/form-data">
-        <label for="description">Claim Description:</label><br>
-        <textarea name="description" id="description" required></textarea><br><br>
-        
-        <label for="photos">Upload Photos:</label>
-        <input type="file" name="photos[]" multiple="multiple" required><br><br>
-        
-        <button type="submit">Submit Claim</button>
-    </form>
+<body><h2>Pateik nuostolį</h2>
+<?php if ($message): ?>
+    <p><?php echo htmlspecialchars($message); ?></p>
+<?php endif; ?>
+<form action="claim_submission.php" method="post" enctype="multipart/form-data">
+    <label for="description">Nuostolio aprašymas:</label>
+    <textarea name="description" id="description" required></textarea>
+    
+    <label for="photos">Įkelti nuotraukas:</label>
+    <div class="file-upload-container">
+        <label class="file-upload-btn" onclick="document.getElementById('photos').click()">Pasirinkti failus</label>
+        <input type="file" name="photos[]" id="photos" multiple="multiple" required>
+        <div class="file-names" id="fileNames">Neįkeltos jokios nuotraukos</div>
+    </div>
+    
+    <button type="submit">Pateikti nuostolį</button>
+</form>
+
+<script>
+    // JavaScript to update file names on file selection
+    const fileInput = document.getElementById('photos');
+    const fileNamesDisplay = document.getElementById('fileNames');
+    
+    fileInput.addEventListener('change', () => {
+        const fileNames = Array.from(fileInput.files).map(file => file.name).join(', ');
+        fileNamesDisplay.textContent = fileNames || 'No files chosen';
+    });
+</script>
 </body>
 </html>
 <?php include 'footer.php'; ?>

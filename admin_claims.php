@@ -42,19 +42,51 @@ $deniedClaims = fetchClaimsByStatus($pdo, 'Denied');
 <head>
     <meta charset="UTF-8">
     <title>Admin - Manage Claims</title>
+    <style>
+        /* Style the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        /* Make input fields and buttons fill their cells */
+        input[type="number"], button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        /* Button styling */
+        button {
+            background-color: #3d2486; /* Custom color */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #291a61; /* Darker shade on hover */
+        }
+    </style>
 </head>
 <body>
     <h2>Admin - Manage Claims</h2>
 
     <!-- Pending Claims Table -->
-    <h3>Pending Claims</h3>
+    <h3>Neįvertinti nuostoliai</h3>
     <table border="1">
         <tr>
-            <th>Claim ID</th>
-            <th>User Name</th>
-            <th>Description</th>
-            <th>Date Submitted</th>
-            <th>Action</th>
+            <th>Nuostolio ID</th>
+            <th>Vardas</th>
+            <th>Aprašymas</th>
+            <th>Pridavimo data</th>
+            <th>Veiksmas</th>
         </tr>
         <?php foreach ($pendingClaims as $claim): ?>
             <tr>
@@ -65,7 +97,7 @@ $deniedClaims = fetchClaimsByStatus($pdo, 'Denied');
                 <td>
                     <form action="claim_details.php" method="get">
                         <input type="hidden" name="claim_id" value="<?php echo htmlspecialchars($claim['claim_id']); ?>">
-                        <button type="submit">Review</button>
+                        <button type="submit">Įvertinti</button>
                     </form>
                 </td>
             </tr>
@@ -73,14 +105,14 @@ $deniedClaims = fetchClaimsByStatus($pdo, 'Denied');
     </table>
     
     <!-- Approved Claims Table -->
-    <h3>Approved Claims</h3>
+    <h3>Patvirtinti nuostoliai</h3>
     <table border="1">
         <tr>
-            <th>Claim ID</th>
-            <th>User Name</th>
-            <th>Description</th>
-            <th>Total Repair Cost</th>
-            <th>Date Submitted</th>
+            <th>Nuostolio ID</th>
+            <th>Vardas</th>
+            <th>Aprašymas</th>
+            <th>Galutinė taisymo kaina</th>
+            <th>Pridavimo data</th>
         </tr>
         <?php foreach ($approvedClaims as $claim): ?>
             <tr>
@@ -94,13 +126,13 @@ $deniedClaims = fetchClaimsByStatus($pdo, 'Denied');
     </table>
 
     <!-- Denied Claims Table -->
-    <h3>Denied Claims</h3>
+    <h3>Atmesti nuostoliai</h3>
     <table border="1">
         <tr>
-            <th>Claim ID</th>
-            <th>User Name</th>
-            <th>Description</th>
-            <th>Date Submitted</th>
+            <th>Nuostolio ID</th>
+            <th>Vardas</th>
+            <th>Aprašymas</th>
+            <th>Pridavimo data</th>
         </tr>
         <?php foreach ($deniedClaims as $claim): ?>
             <tr>

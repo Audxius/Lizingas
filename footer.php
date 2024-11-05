@@ -30,11 +30,11 @@ $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 <div id="right-sidebar">
     <!-- Display user information in the right sidebar for the current user -->
     <?php if ($userInfo): ?>
-        <p><strong>User Name:</strong> <?= htmlspecialchars($userInfo['username']); ?></p>
-        <p><strong>Years with No Claims:</strong> <?= htmlspecialchars($userInfo['years_no_claims']); ?></p>
-        <p><strong>Number of Services:</strong> <?= htmlspecialchars($userInfo['num_services']); ?></p>
-        <p><strong>Number of Referrals:</strong> <?= htmlspecialchars($userInfo['referral_count']); ?></p>
-        <p><strong>Profit/Loss Score:</strong> <?= htmlspecialchars($userInfo['profit_loss_score']); ?></p>
+        <p><strong>Vartotojas:</strong> <?= htmlspecialchars($userInfo['username']); ?></p>
+        <p><strong>Metai be paraiškų:</strong> <?= htmlspecialchars($userInfo['years_no_claims']); ?></p>
+        <p><strong>Paslaugų kiekis:</strong> <?= htmlspecialchars($userInfo['num_services']); ?></p>
+        <p><strong>Nukreiptų žmonių kiekis:</strong> <?= htmlspecialchars($userInfo['referral_count']); ?></p>
+        <p><strong>Pelno/žalos vertė:</strong> <?= htmlspecialchars($userInfo['profit_loss_score']); ?></p>
     <?php else: ?>
         <p>No additional information available.</p>
     <?php endif; ?>

@@ -66,7 +66,7 @@ $photoStmt->execute([$claimId]);
 $photos = $photoStmt->fetchAll(PDO::FETCH_COLUMN);
 
 // Define parts to be evaluated
-$parts = ['Windows', 'Lights', 'Fenders', 'Doors', 'Bumpers', 'Mirrors'];
+$parts = ['Langai', 'Šviestuvai', 'Sparnai', 'Durys', 'Bamperis', 'Veidrodėliai'];
 ?>
 
 <!DOCTYPE html>
@@ -74,13 +74,53 @@ $parts = ['Windows', 'Lights', 'Fenders', 'Doors', 'Bumpers', 'Mirrors'];
 <head>
     <meta charset="UTF-8">
     <title>Claim Details</title>
+    <style>/* Style the form labels */
+label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+/* Style the input fields and select dropdown */
+input[type="number"],
+select {
+    width: 100%;
+    padding: 8px;
+    
+    box-sizing: border-box;
+}
+
+/* Center and style the button */
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #3d2486; /* Button color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #291a61; /* Darker shade on hover */
+}
+
+/* Style the form container */
+form {
+    max-width: 400px; /* Set a max-width for the form */
+    margin: 0 auto;
+}
+
+    </style>
 </head>
 <body>
-    <h2>Claim Details - Claim ID <?php echo htmlspecialchars($claimId); ?></h2>
-    <p><strong>Description:</strong> <?php echo htmlspecialchars($claim['description']); ?></p>
+    <h2>Nuostolio <?php echo htmlspecialchars($claimId); ?> detalės</h2>
+    <p><strong>Aprašymas:</strong> <?php echo htmlspecialchars($claim['description']); ?></p>
 
     <!-- Display uploaded images -->
-    <h3>Uploaded Photos</h3>
+    <h3>Pateikta nuotrauka</h3>
     <?php if (!empty($photos)): ?>
         <?php foreach ($photos as $photo): ?>
             <a href="<?php echo htmlspecialchars($photo); ?>" target="_blank">
@@ -91,7 +131,7 @@ $parts = ['Windows', 'Lights', 'Fenders', 'Doors', 'Bumpers', 'Mirrors'];
         <p>No photos uploaded for this claim.</p>
     <?php endif; ?>
 
-    <h3>Part Repair Costs</h3>
+    <h3>Detalių keitimo kaina</h3>
     <form method="post">
         <?php foreach ($parts as $part): ?>
             <label for="<?php echo $part; ?>"><?php echo $part; ?>:</label>
@@ -100,15 +140,15 @@ $parts = ['Windows', 'Lights', 'Fenders', 'Doors', 'Bumpers', 'Mirrors'];
 
         <h3>Status</h3>
         <select name="status">
-            <option value="Pending" <?php echo $claim['status'] == 'Pending' ? 'selected' : ''; ?>>Pending</option>
-            <option value="Approved" <?php echo $claim['status'] == 'Approved' ? 'selected' : ''; ?>>Approved</option>
-            <option value="Denied" <?php echo $claim['status'] == 'Denied' ? 'selected' : ''; ?>>Denied</option>
+            <option value="Pending" <?php echo $claim['status'] == 'Pending' ? 'selected' : ''; ?>>Neįvertintas</option>
+            <option value="Approved" <?php echo $claim['status'] == 'Approved' ? 'selected' : ''; ?>>Patvirtintas</option>
+            <option value="Denied" <?php echo $claim['status'] == 'Denied' ? 'selected' : ''; ?>>Atmestas</option>
         </select><br><br>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Priduoti</button>
     </form>
 
-    <p><a href="admin_claims.php">Back to Claims</a></p>
+    <p><a href="admin_claims.php">Atgal į nuostolių sąrašą</a></p>
 </body>
 </html>
 <?php include 'footer.php'; ?>
