@@ -39,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $discountedMonthlyPayment = $monthlyPayment - $discountAmount;
 
     // Display the result
-    echo "<h2>Leasing Calculation Result</h2>";
-    echo "Item Cost: $" . number_format($itemCost, 2) . "<br>";
-    echo "Down Payment: $" . number_format($downPayment, 2) . "<br>";
-    echo "Lease Term: " . $leaseTerm . " months<br>";
-    echo "Annual Interest Rate: " . number_format($annualInterestRate, 2) . "%<br>";
-    echo "Discount Applied: " . number_format($discountPercent, 2) . "%<br>";
-    echo "Original Monthly Payment: $" . number_format($monthlyPayment, 2) . "<br>";
-    echo "<strong>Discounted Monthly Payment: $" . number_format($discountedMonthlyPayment, 2) . "</strong>";
+    echo "<h2>Lizingo skaičiuotuvo rezultatai</h2>";
+    echo "Kaina: $" . number_format($itemCost, 2) . "<br>";
+    echo "Pradine imoka: $" . number_format($downPayment, 2) . "<br>";
+    echo "Terminas: " . $leaseTerm . " mėnesių<br>";
+    echo "Metines palukanos: " . number_format($annualInterestRate, 2) . "%<br>";
+    echo "Pritaikyta nuolaida: " . number_format($discountPercent, 2) . "%<br>";
+    echo "Orginalus menesinis mokestis: $" . number_format($monthlyPayment, 2) . "<br>";
+    echo "<strong>Menesinis mokestis po nuolaidos: $" . number_format($discountedMonthlyPayment, 2) . "</strong>";
 }
 ?>
 
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Leasing Calculator</title>
+    <title>Lizingo skaiciuokle</title>
      <style>
         /* Style the form labels */
         label {

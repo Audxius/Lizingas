@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: dashboard.php");
         exit();
     } else {
-        echo "Registration failed. Please try again.";
+        echo "Registracija nepavyko. Bandykite iš naujo.";
     }
 }
 ?>

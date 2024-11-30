@@ -49,32 +49,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->execute([$claimId, $targetFilePath]);
                 $photoPaths[] = $targetFilePath;
             } else {
-                $message .= "Failed to move file: " . htmlspecialchars($originalFileName) . "<br>";
+                $message .= "Nepavyko perkelti failo: " . htmlspecialchars($originalFileName) . "<br>";
             }
         } else {
             // Detailed error messages based on the error code
             switch ($fileError) {
                 case UPLOAD_ERR_INI_SIZE:
                 case UPLOAD_ERR_FORM_SIZE:
-                    $message .= "File too large: " . htmlspecialchars($originalFileName) . "<br>";
+                    $message .= "Failas per didelis: " . htmlspecialchars($originalFileName) . "<br>";
                     break;
                 case UPLOAD_ERR_PARTIAL:
-                    $message .= "File only partially uploaded: " . htmlspecialchars($originalFileName) . "<br>";
+                    $message .= "Failas dalinai įkeltas: " . htmlspecialchars($originalFileName) . "<br>";
                     break;
                 case UPLOAD_ERR_NO_FILE:
-                    $message .= "No file uploaded for: " . htmlspecialchars($originalFileName) . "<br>";
+                    $message .= "Joks failas neįkeltas: " . htmlspecialchars($originalFileName) . "<br>";
                     break;
                 case UPLOAD_ERR_NO_TMP_DIR:
-                    $message .= "Missing temporary folder for file: " . htmlspecialchars($originalFileName) . "<br>";
+                    $message .= "Nera laikino aplankalo failui: " . htmlspecialchars($originalFileName) . "<br>";
                     break;
                 case UPLOAD_ERR_CANT_WRITE:
-                    $message .= "Failed to write file to disk: " . htmlspecialchars($originalFileName) . "<br>";
+                    $message .= "Nepavyko rašyti į diską: " . htmlspecialchars($originalFileName) . "<br>";
                     break;
                 case UPLOAD_ERR_EXTENSION:
-                    $message .= "File upload stopped by a PHP extension: " . htmlspecialchars($originalFileName) . "<br>";
+                    $message .= "Failo įkelimas sustabdytas php plėtinio: " . htmlspecialchars($originalFileName) . "<br>";
                     break;
                 default:
-                    $message .= "Unknown upload error for file: " . htmlspecialchars($originalFileName) . "<br>";
+                    $message .= "Nežinoma įkėlimo klaida: " . htmlspecialchars($originalFileName) . "<br>";
                     break;
             }
         }
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute([$userId]);
 
     if (empty($message)) {
-        $message = "Claim submitted successfully!";
+        $message = "Operacija atlikta sekmingai";
     }
 }
 ?>
@@ -198,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     fileInput.addEventListener('change', () => {
         const fileNames = Array.from(fileInput.files).map(file => file.name).join(', ');
-        fileNamesDisplay.textContent = fileNames || 'No files chosen';
+        fileNamesDisplay.textContent = fileNames || 'Nepasirinkti jokie failai';
     });
 </script>
 </body>

@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_user'])) {
     // Update years without a claim and number of services for the specified user
     $stmt = $pdo->prepare("UPDATE Users SET years_no_claims = ?, num_services = ? WHERE user_id = ?");
     $stmt->execute([$yearsNoClaims, $numServices, $targetUserId]);
-    echo "User ID $targetUserId details updated successfully!";
+    echo "Vartotojo $targetUserId duomenys sėkmingai atnaujinti!";
 }
 
 // Fetch all users to display in the dashboard
@@ -43,7 +43,7 @@ $users = $stmt->fetchAll();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard - Manage Users</title>
+    <title>Tvarkyti naudotojus</title>
     <style>
         /* Style the table */
         table {

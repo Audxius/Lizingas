@@ -44,7 +44,7 @@ $deniedClaims = fetchClaimsByStatus($pdo, 'Denied');
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin - Manage Claims</title>
+    <title>Tvarkyti nuostolius</title>
     <style>
         /* Style the table */
         table {
@@ -79,7 +79,7 @@ $deniedClaims = fetchClaimsByStatus($pdo, 'Denied');
     </style>
 </head>
 <body>
-    <h2>Admin - Manage Claims</h2>
+    <h2>Tvarkyti nuostolius</h2>
 
     <!-- Pending Claims Table -->
     <h3>Neįvertinti nuostoliai</h3>

@@ -24,7 +24,7 @@ $isAdmin = $user && $user['is_admin'];
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Your Site</title>
+    <title>Lizingas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>

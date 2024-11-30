@@ -131,7 +131,7 @@ form {
             </a>
         <?php endforeach; ?>
     <?php else: ?>
-        <p>No photos uploaded for this claim.</p>
+        <p>Jokios nuotraukos nebuvo įkeltos šiam nuostoliui.</p>
     <?php endif; ?>
 
     <h3>Detalių keitimo kaina</h3>

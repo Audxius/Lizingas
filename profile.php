@@ -24,7 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $numServices = intval($_POST['num_services']);
     $stmt = $pdo->prepare("UPDATE Users SET num_services = ? WHERE user_id = ?");
     $stmt->execute([$numServices, $userId]);
-    echo "Services updated successfully!";
+    
+    // Fetch the updated value
+    $stmt = $pdo->prepare("SELECT num_services FROM Users WHERE user_id = ?");
+    $stmt->execute([$userId]);
+    $user = $stmt->fetch();
+    
+    // Optional: Display success message
+    echo "<p>Sekmingai atnaujinta!</p>";
 }
 ?>
 
@@ -32,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update Services</title>
+    <title>Atnaujinti paslaugas</title>
     <style>
         /* Style the form labels */
         label {

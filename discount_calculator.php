@@ -66,7 +66,7 @@ if ($user) {
     echo "Atvestų žmonių skaičius: $referrals <br>";
     echo "<strong>Galutinė nuolaida: " . number_format($totalDiscount, 2) . "%</strong>";
 } else {
-    echo "User not found.";
+    echo "Vartotojas nerastas.";
 }
 ?>
 

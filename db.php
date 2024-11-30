@@ -11,7 +11,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Enable exceptions for errors
 } catch (PDOException $e) {
     // Display error message if connection fails
-    die("Database connection failed: " . $e->getMessage());
+    die("Nepavyko prisijungti prie duomenų bazės: " . $e->getMessage());
 }
 ?>
 

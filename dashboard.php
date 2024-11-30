@@ -26,7 +26,7 @@ $isAdmin = $user && $user['is_admin'];
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Suvestine</title>
 
 </head>
 <body>

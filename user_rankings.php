@@ -29,10 +29,10 @@ $users = $stmt->fetchAll();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Rankings</title>
+    <title>Vartotoju reitingas</title>
 </head>
 <body>
-    <h2>User Profit/Loss Rankings</h2>
+    <h2>Vartotojo pelno/nuostoliu vertinimas</h2>
     <table border="1">
         <tr>
             <th>Vieta</th>
