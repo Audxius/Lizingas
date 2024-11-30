@@ -74,3 +74,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </body>
 </html>
 <?php include 'footer.php'; ?>
+
+<?php
+// Display user balance
+$userId = $_SESSION['user_id'];
+$query = "SELECT balance FROM users WHERE user_id = ?";
+$stmt = $db->prepare($query);
+$stmt->bind_param('i', $userId);
+$stmt->execute();
+$stmt->bind_result($balance);
+$stmt->fetch();
+echo "<h3>Jūsų balansas: €" . number_format($balance, 2) . "</h3>";
+?>

@@ -27,15 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_user'])) {
     $targetUserId = intval($_POST['user_id']);
     $yearsNoClaims = intval($_POST['years_no_claims']);
     $numServices = intval($_POST['num_services']);
+    $balance = floatval($_POST['balance']);
 
-    // Update years without a claim and number of services for the specified user
-    $stmt = $pdo->prepare("UPDATE Users SET years_no_claims = ?, num_services = ? WHERE user_id = ?");
-    $stmt->execute([$yearsNoClaims, $numServices, $targetUserId]);
+    // Update user data in the database
+    $stmt = $pdo->prepare("UPDATE Users SET years_no_claims = ?, num_services = ?, balance = ? WHERE user_id = ?");
+    $stmt->execute([$yearsNoClaims, $numServices, $balance, $targetUserId]);
     echo "Vartotojo $targetUserId duomenys sėkmingai atnaujinti!";
 }
 
 // Fetch all users to display in the dashboard
-$stmt = $pdo->query("SELECT user_id, name, years_no_claims, num_services FROM Users ORDER BY user_id");
+$stmt = $pdo->query("SELECT user_id, name, years_no_claims, num_services, balance FROM Users ORDER BY user_id");
 $users = $stmt->fetchAll();
 ?>
 
@@ -52,7 +53,6 @@ $users = $stmt->fetchAll();
         }
         
         th, td {
-            
             text-align: left;
             border: 1px solid #ddd;
         }
@@ -85,6 +85,7 @@ $users = $stmt->fetchAll();
             <th>Vardas</th>
             <th>Metai be nuostolių</th>
             <th>Užsiprenumeruotų paslaugų skaičius</th>
+            <th>Turima suma (€)</th>
             <th>Atnaujinti</th>
         </tr>
         <?php foreach ($users as $user): ?>
@@ -97,6 +98,9 @@ $users = $stmt->fetchAll();
                     </td>
                     <td>
                         <input type="number" name="num_services" value="<?php echo htmlspecialchars($user['num_services']); ?>" min="0" required>
+                    </td>
+                    <td>
+                        <input type="number" name="balance" value="<?php echo htmlspecialchars($user['balance']); ?>" step="0.01" required>
                     </td>
                     <td>
                         <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user['user_id']); ?>">

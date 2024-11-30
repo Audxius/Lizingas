@@ -204,3 +204,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </body>
 </html>
 <?php include 'footer.php'; ?>
+
+<?php
+// Refund logic
+if ($claimApprovedForRefund) { // Replace with your actual condition
+    $userId = $_POST['user_id']; // Assuming this is passed in the form
+    $refundAmount = floatval($_POST['refund_amount']); // Amount to refund
+    
+    // Add the refund amount to the user's balance
+    $query = "UPDATE users SET balance = balance + ? WHERE user_id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('di', $refundAmount, $userId);
+    if ($stmt->execute()) {
+        echo "€" . number_format($refundAmount, 2) . " buvo pridėta į jūsų balansą.";
+    } else {
+        echo "Klaida atnaujinant balansą.";
+    }
+}
+?>

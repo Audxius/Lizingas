@@ -53,6 +53,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $pdo->prepare("UPDATE Claims SET status = ?, repair_cost = ? WHERE claim_id = ?");
     $stmt->execute([$status, $totalRepairCost, $claimId]);
 
+    // If the claim is approved, update the user's balance
+    if ($status === 'Approved') {
+        // Fetch the user_id associated with the claim
+        $stmt = $pdo->prepare("SELECT user_id FROM Claims WHERE claim_id = ?");
+        $stmt->execute([$claimId]);
+        $claimUserId = $stmt->fetchColumn();
+
+        if ($claimUserId) {
+            // Add the repair cost to the user's balance
+            $stmt = $pdo->prepare("UPDATE Users SET balance = balance + ? WHERE user_id = ?");
+            $stmt->execute([$totalRepairCost, $claimUserId]);
+        }
+    }
+
     echo "Claim ID $claimId has been updated!";
     header("Location: admin_claims.php");
     exit();
