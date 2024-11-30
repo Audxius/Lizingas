@@ -11,15 +11,16 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Check if the user is an admin
+// Check if the user is an admin or moderator
 $userId = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT is_admin FROM Users WHERE user_id = ?");
+$stmt = $pdo->prepare("SELECT role FROM Users WHERE user_id = ?");
 $stmt->execute([$userId]);
 $user = $stmt->fetch();
 
-if (!$user || !$user['is_admin']) {
-    die("Access denied: Admins only.");
+if (!$user || ($user['role'] !== 'admin' && $user['role'] !== 'moderator')) {
+    die("Access denied: Admins and Moderators only.");
 }
+
 
 // Retrieve the claim ID from the URL
 $claimId = $_GET['claim_id'] ?? null;

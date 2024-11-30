@@ -11,14 +11,14 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Check if the user is an admin
+// Check if the user is an admin or a moderator
 $userId = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT is_admin FROM Users WHERE user_id = ?");
+$stmt = $pdo->prepare("SELECT role FROM Users WHERE user_id = ?");
 $stmt->execute([$userId]);
 $user = $stmt->fetch();
 
-if (!$user || !$user['is_admin']) {
-    die("Access denied: Admins only.");
+if (!$user || ($user['role'] !== 'admin' && $user['role'] !== 'moderator')) {
+    die("Access denied: Admins and Moderators only.");
 }
 
 // Function to fetch claims by status
@@ -53,7 +53,6 @@ $deniedClaims = fetchClaimsByStatus($pdo, 'Denied');
         }
         
         th, td {
-            
             text-align: left;
             border: 1px solid #ddd;
         }
@@ -122,7 +121,7 @@ $deniedClaims = fetchClaimsByStatus($pdo, 'Denied');
                 <td><?php echo htmlspecialchars($claim['claim_id']); ?></td>
                 <td><?php echo htmlspecialchars($claim['name']); ?></td>
                 <td><?php echo htmlspecialchars($claim['description']); ?></td>
-                <td><?php echo "$" . number_format($claim['repair_cost'], 2); ?></td>
+                <td><?php echo "€" . number_format($claim['repair_cost'], 2); ?></td>
                 <td><?php echo htmlspecialchars($claim['created_at']); ?></td>
             </tr>
         <?php endforeach; ?>

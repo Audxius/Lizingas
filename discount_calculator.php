@@ -85,6 +85,23 @@ hr {
   margin: 1em 0;
   padding: 0;
 }
+h4 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+ul {
+    max-width: 600px;
+    margin: 0 auto; /* Centers the list horizontally */
+    text-align: center; /* Centers the text in the list items */
+    list-style-type: none; /* Removes default bullet points */
+    padding: 0;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
         </style>
 </head>
 <body>
@@ -103,6 +120,11 @@ hr {
 <h4>Atvesti Žmones</h4>
 <ul>
     <li>Už kiekvieną atvestą žmogų vartotojas gauna papildomą 2% nuolaidą.</li>
+</ul>
+<h4>Lizingo tipas</h4>
+<ul>
+    <li>Automobiliai (lizingas iki 7 metų; auto ne senesnis nei 10 metų, kai bus įmokėta paskutinė įmoka, nuvažiavęs ne daugiau nei 50 000 km.)</li>
+    <li>Prekės (lizingas iki 3 metų)</li>
 </ul>
 
 </body>

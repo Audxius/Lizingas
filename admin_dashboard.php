@@ -14,11 +14,11 @@ if (!isset($_SESSION['user_id'])) {
 
 // Check if the logged-in user is an admin
 $userId = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT is_admin FROM Users WHERE user_id = ?");
+$stmt = $pdo->prepare("SELECT role FROM Users WHERE user_id = ?");
 $stmt->execute([$userId]);
 $user = $stmt->fetch();
 
-if (!$user || !$user['is_admin']) {
+if (!$user || $user['role'] !== 'admin') {
     die("Access denied: Admins only.");
 }
 
@@ -28,15 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_user'])) {
     $yearsNoClaims = intval($_POST['years_no_claims']);
     $numServices = intval($_POST['num_services']);
     $balance = floatval($_POST['balance']);
+    $role = $_POST['role'];
 
     // Update user data in the database
-    $stmt = $pdo->prepare("UPDATE Users SET years_no_claims = ?, num_services = ?, balance = ? WHERE user_id = ?");
-    $stmt->execute([$yearsNoClaims, $numServices, $balance, $targetUserId]);
+    $stmt = $pdo->prepare("UPDATE Users SET years_no_claims = ?, num_services = ?, balance = ?, role = ? WHERE user_id = ?");
+    $stmt->execute([$yearsNoClaims, $numServices, $balance, $role, $targetUserId]);
     echo "Vartotojo $targetUserId duomenys sėkmingai atnaujinti!";
 }
 
 // Fetch all users to display in the dashboard
-$stmt = $pdo->query("SELECT user_id, name, years_no_claims, num_services, balance FROM Users ORDER BY user_id");
+$stmt = $pdo->query("SELECT user_id, name, years_no_claims, num_services, balance, role FROM Users ORDER BY user_id");
 $users = $stmt->fetchAll();
 ?>
 
@@ -46,34 +47,27 @@ $users = $stmt->fetchAll();
     <meta charset="UTF-8">
     <title>Tvarkyti naudotojus</title>
     <style>
-        /* Style the table */
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        
         th, td {
             text-align: left;
             border: 1px solid #ddd;
         }
-
-        /* Make input fields and buttons fill their cells */
-        input[type="number"], button {
+        input[type="number"], select, button {
             width: 100%;
             box-sizing: border-box;
             padding: 10px;
         }
-
-        /* Button styling */
         button {
-            background-color: #3d2486; /* Custom color */
+            background-color: #3d2486;
             color: #fff;
             border: none;
             cursor: pointer;
         }
-
         button:hover {
-            background-color: #291a61; /* Darker shade on hover */
+            background-color: #291a61;
         }
     </style>
 </head>
@@ -86,6 +80,7 @@ $users = $stmt->fetchAll();
             <th>Metai be nuostolių</th>
             <th>Užsiprenumeruotų paslaugų skaičius</th>
             <th>Turima suma (€)</th>
+            <th>Vartotojo rolė</th>
             <th>Atnaujinti</th>
         </tr>
         <?php foreach ($users as $user): ?>
@@ -101,6 +96,13 @@ $users = $stmt->fetchAll();
                     </td>
                     <td>
                         <input type="number" name="balance" value="<?php echo htmlspecialchars($user['balance']); ?>" step="0.01" required>
+                    </td>
+                    <td>
+                        <select name="role" required>
+                            <option value="user" <?php echo $user['role'] === 'user' ? 'selected' : ''; ?>>Vartotojas</option>
+                            <option value="moderator" <?php echo $user['role'] === 'moderator' ? 'selected' : ''; ?>>Moderatorius</option>
+                            <option value="admin" <?php echo $user['role'] === 'admin' ? 'selected' : ''; ?>>Administratorius</option>
+                        </select>
                     </td>
                     <td>
                         <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user['user_id']); ?>">

@@ -12,12 +12,16 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Check if the user is an admin
+// Fetch the user's role
 $userId = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT is_admin FROM Users WHERE user_id = ?");
+$stmt = $pdo->prepare("SELECT role FROM Users WHERE user_id = ?");
 $stmt->execute([$userId]);
 $user = $stmt->fetch();
-$isAdmin = $user && $user['is_admin'];
+$role = $user ? $user['role'] : null;
+
+// Role checks
+$isAdmin = $role === 'admin';
+$isModerator = $role === 'moderator';
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +44,9 @@ $isAdmin = $user && $user['is_admin'];
             
             <?php if ($isAdmin): ?>
                 <button onclick="location.href='admin_dashboard.php'" title="Redaguoti kiek metų vartotojas nepateikė nuostolio ir kiek paslaugų užsiprenumeravęs">Admin sąsaja</button>
+            <?php endif; ?>
+            
+            <?php if ($isAdmin || $isModerator): ?>
                 <button onclick="location.href='admin_claims.php'" title="Valdyti nuostolių paraiškas">Nuostolių paraiškos</button>
             <?php endif; ?>
 

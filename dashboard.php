@@ -14,13 +14,16 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Check if the user is an admin
+// Check if the user is an admin or moderator
 $userId = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT is_admin FROM Users WHERE user_id = ?");
+$stmt = $pdo->prepare("SELECT role FROM Users WHERE user_id = ?");
 $stmt->execute([$userId]);
 $user = $stmt->fetch();
-$isAdmin = $user && $user['is_admin'];
-?>
+
+if (!$user || ($user['role'] !== 'admin' && $user['role'] !== 'moderator')) {
+    die("Access denied: Admins and Moderators only.");
+}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,6 +60,18 @@ $isAdmin = $user && $user['is_admin'];
             </ul>
         </td>
     </tr>
+    <tr>
+    <td><strong>Pataisymai</strong></td>
+        <td>
+            <ul>
+                <li>Trys registruotų naudotojų tipai</li>
+                <li>Visi sistemos užrašai LT kalba</li>
+                <li>Du tipai lizingo. Prekės ir automobiliai</li>
+                <li>-Nepavyko įkelti nuotraukų</li>
+                <li>-Kai patvirtinamas lizingas - nuskaičiuojama pradinio įnašo pinigų suma iš profilio, kai daromas nuostolių grąžinimas - įkrenta pinigai į profilį. </li>
+            </ul>
+        </td>
+</tr>
 </table>
 </body>
 </html>
