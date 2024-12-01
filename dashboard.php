@@ -23,7 +23,7 @@ $user = $stmt->fetch();
 if (!$user || ($user['role'] !== 'admin' && $user['role'] !== 'moderator')) {
     die("Access denied: Admins and Moderators only.");
 }
-
+?>
 
 <!DOCTYPE html>
 <html lang="en">
