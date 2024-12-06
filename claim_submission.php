@@ -96,25 +96,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <title>Submit a Claim</title>
     <style>
-    /* Center everything in the body */
     body {
         display: flex;
         justify-content: center;
-        
         min-height: 100vh;
         text-align: center;
         margin: 0;
         font-family: Arial, sans-serif;
     }
-
-    /* Style the form labels */
     label {
         display: block;
         font-size: 20px;
         margin-bottom: 8px;
     }
-
-    /* Style input fields and textarea */
     input[type="number"], textarea {
         width: 100%;
         padding: 10px;
@@ -122,15 +116,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         margin-bottom: 20px;
         box-sizing: border-box;
     }
-
-    /* Style the form container */
     form {
         max-width: 400px;
         width: 100%;
         margin: 0 auto;
     }
-
-    /* Style buttons */
     button, .file-upload-btn {
         display: inline-block;
         padding: 10px 20px;
@@ -141,39 +131,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         border: none;
         border-radius: 4px;
     }
-
-    /* Hide the native file input */
     input[type="file"] {
         display: none;
     }
-
-    /* Style for file upload button and selected file names container */
     .file-upload-container {
         margin-bottom: 20px;
         text-align: center;
     }
-
     .file-names {
         margin-top: 10px;
         font-size: 14px;
         color: #555;
         word-wrap: break-word;
     }
-    button, .file-upload-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #3d2486; /* Updated button color */
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-}
-
 </style>
 
 </head>
-<body><h2>Pateik nuostolį</h2>
+<body>
+<h2>Pateik nuostolį</h2>
 <?php if ($message): ?>
     <p><?php echo htmlspecialchars($message); ?></p>
 <?php endif; ?>
@@ -192,7 +167,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </form>
 
 <script>
-    // JavaScript to update file names on file selection
     const fileInput = document.getElementById('photos');
     const fileNamesDisplay = document.getElementById('fileNames');
     
@@ -207,15 +181,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <?php
 // Refund logic
-if ($claimApprovedForRefund) { // Replace with your actual condition
-    $userId = $_POST['user_id']; // Assuming this is passed in the form
-    $refundAmount = floatval($_POST['refund_amount']); // Amount to refund
+$claimApprovedForRefund = false; // Initialize as false
+
+// Logic to determine if the claim is approved
+if (isset($_POST['claim_id'])) {
+    $claimId = $_POST['claim_id'];
+    $stmt = $pdo->prepare("SELECT status FROM Claims WHERE claim_id = ?");
+    $stmt->execute([$claimId]);
+    $claimStatus = $stmt->fetchColumn();
+
+    $claimApprovedForRefund = ($claimStatus === 'approved'); // Update condition based on status
+}
+
+if ($claimApprovedForRefund) {
+    $userId = $_POST['user_id'];
+    $refundAmount = floatval($_POST['refund_amount']);
     
-    // Add the refund amount to the user's balance
-    $query = "UPDATE users SET balance = balance + ? WHERE user_id = ?";
-    $stmt = $db->prepare($query);
-    $stmt->bind_param('di', $refundAmount, $userId);
-    if ($stmt->execute()) {
+    $query = "UPDATE Users SET balance = balance + ? WHERE user_id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$refundAmount, $userId]);
+
+    if ($stmt->rowCount() > 0) {
         echo "€" . number_format($refundAmount, 2) . " buvo pridėta į jūsų balansą.";
     } else {
         echo "Klaida atnaujinant balansą.";
