@@ -14,15 +14,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Check if the user is an admin or moderator
-$userId = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT role FROM Users WHERE user_id = ?");
-$stmt->execute([$userId]);
-$user = $stmt->fetch();
 
-if (!$user || ($user['role'] !== 'admin' && $user['role'] !== 'moderator')) {
-    die("Access denied: Admins and Moderators only.");
-}
 ?>
 
 <!DOCTYPE html>
